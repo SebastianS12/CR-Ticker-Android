@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000b00</color>
+    <color name="colorPrimaryDark">#003002</color>
+    <color name="colorAccent">#2d5a2c</color>
+    <color name="sColorPrimary">#1c1c1c</color>
+    <color name="sColorLight">#e0e0e0</color>
+    <color name="sColorDark">#101010</color>
+
+    <color name="textColour">#ffffff</color>
+    <color name="error_border_color">#e50000</color>
+</resources>

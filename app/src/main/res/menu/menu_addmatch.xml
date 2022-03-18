@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="@string/editor_title">
+        <menu>
+            <item android:id="@+id/addMatch_Button"
+                android:icon="@drawable/ic_baseline_add_circle_24"
+                android:title="@string/menu_addMatchTitle"
+                app:showAsAction="never" />
+
+            <item android:id="@+id/manageMatch_Button"
+                android:icon="@drawable/edit_icon"
+                android:title="@string/menu_manageMatch"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <item android:id="@+id/log_Button"
+        android:icon="@drawable/log_icon"
+        android:title="@string/menu_toLog"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/settings_Button"
+        android:icon="@drawable/settings_icon"
+        android:title="@string/menu_settings"
+        app:showAsAction="never" />
+
+
+
+</menu>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "949172070225",
+    "firebase_url": "https://cr-ticker-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cr-ticker",
+    "storage_bucket": "cr-ticker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949172070225:android:91deedd301a8b1a0e01570",
+        "android_client_info": {
+          "package_name": "com.raffelberg.cr_ticker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949172070225-ha17bu7mg4u3kpre51e678gsk4n0d0rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvi8fU5ZXFWqo0CAw6xgeXh8OKIc3yjfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949172070225-ha17bu7mg4u3kpre51e678gsk4n0d0rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">CR-Ticker</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Nachrichten</string>
+
+    <string name="menu_settings">Einstellungen</string>
+
+
+    <!--UI-Strings-->
+    <string name="colon">:</string>
+    <string name="menu_addMatchTitle">Neues Spiel</string>
+    <string name="menu_manageMatch">Bearbeite Spiel</string>
+    <string name="startMatch_Button">Starte Spiel</string>
+    <string name="endMatch_Button">Beende Spiel</string>
+    <string name="addImage_Description">Add Image</string>
+    <string name="logIn_Button">Log in</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="title">CR-Ticker</string>
+    <string name="refresh">Refresh</string>
+    <string name="placeholder_name2">Name Team 2</string>
+    <string name="placeholder_name1">Name Team 1</string>
+    <string name="placeholder_place">Ort</string>
+    <string name="add_button">Hinzufügen</string>
+    <string name="placeholder_date">Datum</string>
+    <string name="cd_drawericon">drawerIcon</string>
+    <string name="cd_refresh_icon">Refresh Icon</string>
+    <string name="default_score">0</string>
+    <string name="placeholder_team1">Team 1</string>
+    <string name="placeholder_team2">Team 2</string>
+    <string name="decreaseScore">-</string>
+    <string name="increaseScore">+</string>
+
+    <!--Log-Strings-->
+    <string name="startMatch_log">Anpfiff</string>
+    <string name="endMatch_log">Abpfiff</string>
+
+    <string name="noMatch">Noch kein Spiel erstellt!</string>
+    <string name="editor_title">Editor</string>
+    <string name="menu_toLog">Zum Liveticker</string>
+    <string name="pick_logos">Wähle ein Logo</string>
+    <string name="cancel">Abbrechen</string>
+
+</resources>

@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/messages_header">
+
+
+
+            <SwitchPreference
+                android:key="showMessages"
+                app:defaultValue="true"
+                android:title="Sende Nachricht für jedes Ereignis"
+                app:useSimpleSummaryProvider="true" />
+
+
+            <SwitchPreference
+                android:key="showKeyMessages"
+                app:defaultValue="true"
+                android:title="Sende Nachrichten für wichtige Ereignisse"
+                app:useSimpleSummaryProvider="true" />
+
+
+
+
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>
