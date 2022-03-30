@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.raffelberg.cr_ticker.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_tickerLog"
+            app:destination="@id/tickerLog" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_editMatch"
+        android:name="com.raffelberg.cr_ticker.ui.editmatch.EditMatchFragment"
+        android:label="@string/menu_gallery" >
+        <action
+            android:id="@+id/action_nav_editMatch_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:popUpTo="@id/nav_editMatch"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_addmatch"
+        android:name="com.raffelberg.cr_ticker.ui.addmatch.AddMatchFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_addmatch" >
+        <action
+            android:id="@+id/action_nav_addmatch_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:popUpTo="@id/nav_addmatch"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/tickerLog"
+        android:name="com.raffelberg.cr_ticker.ui.tickerlog.TickerLogFragment"
+        android:label="fragment_ticker_log"
+        tools:layout="@layout/fragment_ticker_log" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.raffelberg.cr_ticker.ui.logIn.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_nav_editMatch"
+            app:destination="@id/nav_editMatch"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_logInFragment_to_nav_addmatch"
+            app:destination="@id/nav_addmatch"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
+</navigation>

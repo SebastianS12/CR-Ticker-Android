@@ -12,7 +12,7 @@ import java.util.List;
 public class Converters {
 
     @TypeConverter
-    public static String listToString(List<String> logs){
+    public String listToString(List<String> logs){
         Gson gson = new Gson();
         return gson.toJson(logs);
     }
@@ -20,11 +20,11 @@ public class Converters {
     @TypeConverter
     public List<String> stringToList(String data){
         Gson gson = new Gson();
-        if(data==null){
+        if(data == null)
             return Collections.emptyList();
-        }
+
         Type listType = new TypeToken<List<String>>(){}.getType();
-        return gson.fromJson(data,listType);
+        return gson.fromJson(data, listType);
     }
 
     @TypeConverter
@@ -36,10 +36,10 @@ public class Converters {
     @TypeConverter
     public Team stringToTeam(String data){
         Gson gson = new Gson();
-        if(data==null){
+        if(data == null)
             return null;
-        }
-        Type listType = new TypeToken<Team>(){}.getType();
-        return gson.fromJson(data,listType);
+
+        Type teamType = new TypeToken<Team>(){}.getType();
+        return gson.fromJson(data, teamType);
     }
 }

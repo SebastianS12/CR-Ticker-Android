@@ -2,232 +2,24 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerLayout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground"
-    android:backgroundTint="@android:color/background_light"
-    tools:context=".activities.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/app_bar_main"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/actionBar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/colorPrimary"
-            android:backgroundTint="@color/colorPrimary"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/menuIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="@string/cd_drawericon"
-                android:src="@drawable/menu_icon" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="@string/title"
-                android:textColor="@color/textColour"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
-
-            <ImageView
-                android:id="@+id/refreshIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="0."
-                android:layout_margin="10dp"
-                android:contentDescription="@string/cd_refresh_icon"
-                android:src="@drawable/refresh_icon"/>
-
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clickLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/customborder"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:backgroundTintMode="multiply"
-            android:elevation="10dp"
-            android:fadingEdge="vertical|none"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actionBar"
-            app:layout_constraintVertical_bias="0.0">
-
-            <ImageView
-                android:id="@+id/team1_Logo"
-                android:layout_width="124dp"
-                android:layout_height="124dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/circle_border"
-                android:cropToPadding="true"
-                app:layout_constraintBottom_toTopOf="@+id/team1_Score"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_default_logo_foreground"
-                tools:srcCompat="@drawable/ic_default_logo_foreground" />
-
-            <ImageView
-                android:id="@+id/team2_Logo"
-                android:layout_width="124dp"
-                android:layout_height="124dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/circle_border"
-                android:cropToPadding="true"
-                app:layout_constraintBottom_toTopOf="@+id/team2_Score"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:srcCompat="@drawable/ic_default_logo_foreground" />
-
-            <TextView
-                android:id="@+id/team1_Score"
-                android:layout_width="96dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/default_score"
-                android:textAlignment="center"
-                android:textColor="@color/textColour"
-                android:textSize="60sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/score_Colon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/team1_Logo" />
-
-            <TextView
-                android:id="@+id/team2_Score"
-                android:layout_width="96dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:text="@string/default_score"
-                android:textAlignment="center"
-                android:textColor="@color/textColour"
-                android:textSize="60sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/score_Colon"
-                app:layout_constraintTop_toBottomOf="@+id/team2_Logo" />
-
-            <TextView
-                android:id="@+id/score_Colon"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:gravity="center_vertical"
-                android:text="@string/colon"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/textColour"
-                android:textSize="40sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/team2_Score"
-                app:layout_constraintStart_toEndOf="@+id/team1_Score"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.92" />
-
-            <TextView
-                android:id="@+id/team1_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/placeholder_team1"
-                android:textAlignment="center"
-                android:textColor="@color/textColour"
-                android:textSize="18sp"
-                android:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/team1_Logo"
-                app:layout_constraintEnd_toEndOf="@+id/team1_Logo"
-                app:layout_constraintHorizontal_bias="0.61"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/team2_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/placeholder_team2"
-                android:textAlignment="center"
-                android:textColor="@color/textColour"
-                android:textSize="18sp"
-                android:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/team2_Logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.395"
-                app:layout_constraintStart_toStartOf="@+id/team2_Logo"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/status_View"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/customborder"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="@string/placeholder_date"
-        android:textAlignment="center"
-        android:textColor="@color/textColour"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/clickLayout"
-        app:layout_constraintStart_toStartOf="@+id/clickLayout"
-        app:layout_constraintTop_toBottomOf="@+id/clickLayout" />
-
-    <TextView
-        android:id="@+id/place_View"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/customborder"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="@string/placeholder_place"
-        android:textAlignment="center"
-        android:textColor="@color/textColour"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/status_View"
-        app:layout_constraintStart_toStartOf="@+id/status_View"
-        app:layout_constraintTop_toBottomOf="@+id/status_View" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/navigation_drawer_head"
-        app:menu="@menu/menu_addmatch">
-
-    </com.google.android.material.navigation.NavigationView>
-
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

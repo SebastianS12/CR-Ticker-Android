@@ -1,30 +1,20 @@
 package com.raffelberg.cr_ticker.persistence;
 
 public class Team {
-    private String team_name;
 
-    private String team_score;
+    private String teamName;
+    private String teamScore;
 
-    public Team(){}
+    public Team(){};
 
-    public Team(String team_name){
-        this.team_name = team_name;
-        this.team_score = "0";
+    public Team(String teamName){
+        this.teamName = teamName;
+        this.teamScore = "0";
     }
 
-    public String getTeam_name() {
-        return team_name;
-    }
+    public String getTeamName(){return this.teamName;}
+    public void setTeamName(String teamName){this.teamName = teamName;}
 
-    public String getTeam_score() {
-        return team_score;
-    }
-
-    public void setTeam_score(String team_score){
-        this.team_score=team_score;
-    }
-
-    public void setTeam_name(String team_name) {
-        this.team_name = team_name;
-    }
+    public String getTeamScore(){return this.teamScore;}
+    public void setTeamScore(String teamScore){this.teamScore = teamScore;}
 }

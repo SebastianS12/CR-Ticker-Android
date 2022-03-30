@@ -6,7 +6,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
 @Dao
@@ -16,19 +15,11 @@ public abstract class MatchDao {
     abstract void insertMatch(Match currentMatch);
 
     @Update
-    abstract void updateMatch(Match currentMatch);
+    abstract int updateMatch(Match currentMatch);
 
     @Delete
     abstract void deleteMatch(Match match);
 
-    @Transaction
-     public void addMatchRoom(Match matchDelete,Match matchInsert){
-        deleteMatch(matchDelete);
-        insertMatch(matchInsert);
-    }
-
-    @Query("SELECT * FROM `Match` Limit 1")
-    abstract LiveData<Match>getCurrentMatch();
-
-
+    @Query("SELECT * FROM `Match` WHERE id = :id Limit 1")
+    abstract LiveData<Match> getMatch(String id);
 }

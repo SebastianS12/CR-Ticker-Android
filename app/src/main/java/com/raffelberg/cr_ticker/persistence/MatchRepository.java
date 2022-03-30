@@ -6,46 +6,32 @@ import androidx.lifecycle.LiveData;
 
 public class MatchRepository {
 
-    private MatchDao mMatchDao;
-
+    private final MatchDao mMatchDao;
 
     public MatchRepository(Application application){
-        MatchRoomDatabase db = MatchRoomDatabase.getDatabase(application);
+        MatchDatabase db = MatchDatabase.getDatabase(application);
         mMatchDao = db.matchDao();
-
     }
 
     public void insertMatch(Match match){
-        MatchRoomDatabase.databaseWriteExecutor.execute(()->{
+        MatchDatabase.databaseWriteExecutor.execute(()->{
             mMatchDao.insertMatch(match);
         });
-
     }
 
     public void updateMatch(Match match){
-        MatchRoomDatabase.databaseWriteExecutor.execute(()->{
+        MatchDatabase.databaseWriteExecutor.execute(()->{
             mMatchDao.updateMatch(match);
         });
     }
 
     public void deleteMatch(Match match){
-        MatchRoomDatabase.databaseWriteExecutor.execute(()->{
+        MatchDatabase.databaseWriteExecutor.execute(()->{
             mMatchDao.deleteMatch(match);
         });
     }
 
-    public void addMatchRoom(Match matchDelete, Match matchInsert){
-        MatchRoomDatabase.databaseWriteExecutor.execute(()->{
-            mMatchDao.addMatchRoom(matchDelete,matchInsert);
-        });
-
+    public LiveData<Match> getMatch(String id){
+        return mMatchDao.getMatch(id);
     }
-
-    public LiveData<Match> getCurrentMatch() {
-
-        return mMatchDao.getCurrentMatch();
-
-    }
-
-
 }
