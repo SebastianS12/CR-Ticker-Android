@@ -12,12 +12,14 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.raffelberg.cr_ticker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         //refer to LogIn if needed
+        mAuth = FirebaseAuth.getInstance();
         navController.addOnDestinationChangedListener((controller, destination, arguments)->{
             Bundle bundle = new Bundle();
             bundle.putInt("destination", destination.getId());
-            if(destination.getId() == R.id.nav_addmatch)
+            if(destination.getId() == R.id.nav_addmatch && mAuth.getCurrentUser() == null)
                 navController.navigate(R.id.action_nav_addmatch_to_logInFragment, bundle);
-            if(destination.getId() == R.id.nav_editMatch)
+            if(destination.getId() == R.id.nav_editMatch && mAuth.getCurrentUser() == null)
                 navController.navigate(R.id.action_nav_editMatch_to_logInFragment, bundle);
             drawer.close();
         });

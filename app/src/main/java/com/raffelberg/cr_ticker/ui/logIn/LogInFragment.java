@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.raffelberg.cr_ticker.R;
 import com.raffelberg.cr_ticker.databinding.FragmentLogInBinding;
 
@@ -22,11 +26,12 @@ public class LogInFragment extends Fragment {
 
    private FragmentLogInBinding binding;
    private EditText passwordInput;
+   private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -53,16 +58,18 @@ public class LogInFragment extends Fragment {
         String password = passwordInput.getText().toString();
         int destination = getArguments().getInt("destination");
 
-        Bundle bundle = new Bundle();
-        if(password.equals("123648")){
-            Log.i("destination", String.valueOf(destination));
-            bundle.putString("id", "1.Herren");
-            navigateToTarget(destination, bundle);
-        }
-        if(password.equals("483612")){
-            bundle.putString("id", "1.Damen");
-            navigateToTarget(destination, bundle);
-        }
+        mAuth.signInAnonymously().addOnCompleteListener(task -> {
+            Bundle bundle = new Bundle();
+            if(password.equals("123648")){
+                Log.i("destination", String.valueOf(destination));
+                bundle.putString("id", "1.Herren");
+                navigateToTarget(destination, bundle);
+            }
+            if(password.equals("483612")){
+                bundle.putString("id", "1.Damen");
+                navigateToTarget(destination, bundle);
+            }
+        });
     }
 
     private void navigateToTarget(int destination, Bundle bundle){
