@@ -124,7 +124,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/addMatch_logoPickerContainer"
-                android:name="com.raffelberg.cr_ticker.LogoPickerFragment"
+                android:name="com.raffelberg.cr_ticker.ui.addmatch.LogoPickerFragment"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="32dp"

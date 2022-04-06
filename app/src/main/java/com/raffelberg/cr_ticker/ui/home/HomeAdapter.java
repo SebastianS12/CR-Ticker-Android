@@ -18,7 +18,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private Context context;
 
-
     @NonNull
     @NotNull
     @Override
