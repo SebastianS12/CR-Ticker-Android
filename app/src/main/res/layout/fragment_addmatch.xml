@@ -124,14 +124,13 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/addMatch_logoPickerContainer"
-                android:name="com.raffelberg.cr_ticker.ui.addmatch.LogoPickerFragment"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

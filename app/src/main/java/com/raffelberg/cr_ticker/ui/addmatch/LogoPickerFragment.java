@@ -18,6 +18,8 @@ import com.raffelberg.cr_ticker.R;
 import com.raffelberg.cr_ticker.databinding.FragmentAddmatchBinding;
 import com.raffelberg.cr_ticker.databinding.FragmentLogoPickerBinding;
 
+import java.util.List;
+
 public class LogoPickerFragment extends Fragment implements LogoPickListener {
 
     private FragmentLogoPickerBinding binding;
@@ -43,9 +45,10 @@ public class LogoPickerFragment extends Fragment implements LogoPickListener {
         super.onViewCreated(view, savedInstanceState);
 
         team = requireArguments().getInt("team", 1);
+        List<String> logoPaths = requireArguments().getStringArrayList("logoPaths");
 
         RecyclerView recyclerView = binding.logoPickerRecyclerView;
-        final LogoPickerAdapter adapter = new LogoPickerAdapter(getContext(), this);
+        final LogoPickerAdapter adapter = new LogoPickerAdapter(getContext(), this, logoPaths);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 

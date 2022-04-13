@@ -58,10 +58,18 @@ dependencies {
     //recyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
-    implementation "androidx.navigation:navigation-fragment:2.4.1"
-    implementation "androidx.navigation:navigation-ui:2.4.1"
+    implementation "androidx.navigation:navigation-fragment:2.4.2"
+    implementation "androidx.navigation:navigation-ui:2.4.2"
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
 
     //firebase auth
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    //firebase cloud storage
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 }
