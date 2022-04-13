@@ -52,7 +52,7 @@ public class LogoPickerAdapter extends RecyclerView.Adapter<LogoPickerAdapter.Vi
         ImageLoader imageLoader = new ImageLoader();
         imageLoader.loadLogo(holder.getImageView(), logoPaths.get(position), context);
         holder.getImageView().setOnClickListener(v -> {
-            //logoPickListener.addLogo(logoList[position]);
+            logoPickListener.addLogo(logoPaths.get(position));
         });
     }
 

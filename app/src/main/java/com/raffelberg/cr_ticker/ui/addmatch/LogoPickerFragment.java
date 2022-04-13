@@ -59,10 +59,10 @@ public class LogoPickerFragment extends Fragment implements LogoPickListener {
     }
 
     @Override
-    public void addLogo(String logoID) {
+    public void addLogo(String logoPath) {
         Bundle result = new Bundle();
         result.putInt("team", team);
-        result.putString("logoID", logoID);
+        result.putString("logoPath", logoPath);
         getParentFragmentManager().setFragmentResult("logoPick", result);
         getParentFragmentManager().beginTransaction().remove(this).commit();
     }

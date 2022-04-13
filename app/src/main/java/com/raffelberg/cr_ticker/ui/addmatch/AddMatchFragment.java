@@ -12,9 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.raffelberg.cr_ticker.ImageOperations.ImageLoader;
 import com.raffelberg.cr_ticker.R;
 import com.raffelberg.cr_ticker.databinding.FragmentAddmatchBinding;
 
@@ -36,6 +38,22 @@ public class AddMatchFragment extends Fragment {
 
     public AddMatchFragment(){
         logoPaths = new ArrayList<>();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getParentFragmentManager().setFragmentResultListener("logoPick", this, (requestKey, bundle) -> {
+            String logoPath = bundle.getString("logoPath");
+            int team = bundle.getInt("team");
+
+            ImageLoader imageLoader = new ImageLoader();
+            if(team == 1)
+                imageLoader.loadLogo(logo1ImageView, logoPath, getContext());
+            if(team == 2)
+                imageLoader.loadLogo(logo2ImageView, logoPath, getContext());
+        });
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,6 +78,18 @@ public class AddMatchFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("team", 1);
+                bundle.putStringArrayList("logoPaths", (ArrayList<String>) logoPaths);
+                getParentFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .add(R.id.addMatch_logoPickerContainer, LogoPickerFragment.class, bundle)
+                        .commit();
+            }
+        });
+        logo2ImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("team", 2);
                 bundle.putStringArrayList("logoPaths", (ArrayList<String>) logoPaths);
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
