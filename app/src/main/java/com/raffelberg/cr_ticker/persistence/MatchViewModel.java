@@ -16,4 +16,5 @@ public class MatchViewModel extends ViewModel {
     public void updateMatch(Match match){matchRepository.updateMatch(match);}
     public void deleteMatch(Match match){matchRepository.deleteMatch(match);}
     public LiveData<Match> getMatch(String id){return matchRepository.getMatch(id);}
+    public int matchExists(String id){return matchRepository.matchExists(id);}
 }

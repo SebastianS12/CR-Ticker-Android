@@ -4,6 +4,8 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class MatchRepository {
 
     private final MatchDao mMatchDao;
@@ -33,5 +35,14 @@ public class MatchRepository {
 
     public LiveData<Match> getMatch(String id){
         return mMatchDao.getMatch(id);
+    }
+
+    public int matchExists(String id){
+        AtomicInteger matchExists = new AtomicInteger();
+        MatchDatabase.databaseWriteExecutor.execute(()->{
+            matchExists.set(mMatchDao.matchExists(id));
+        });
+        int test = matchExists.get();
+        return matchExists.get();
     }
 }

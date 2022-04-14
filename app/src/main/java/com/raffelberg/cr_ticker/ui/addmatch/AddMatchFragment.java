@@ -139,7 +139,7 @@ public class AddMatchFragment extends Fragment {
         Match newMatch = new Match(id, place, date, new Team(teamName1), new Team(teamName2));
 
         DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference();
-        dbReference.child("Matches").setValue(newMatch);
+        dbReference.child("Matches").child(id).setValue(newMatch);
 
         ImageLoader imageLoader = new ImageLoader();
         imageLoader.uploadLogoFromImageView("logoRebuild1", logo1ImageView);

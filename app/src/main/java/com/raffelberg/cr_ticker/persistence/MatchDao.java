@@ -22,4 +22,7 @@ public abstract class MatchDao {
 
     @Query("SELECT * FROM `Match` WHERE id = :id Limit 1")
     abstract LiveData<Match> getMatch(String id);
+
+    @Query("SELECT COUNT() FROM `Match` WHERE id = :id ")
+    abstract int matchExists(String id);
 }

@@ -62,11 +62,11 @@ public class LogInFragment extends Fragment {
             Bundle bundle = new Bundle();
             if(password.equals("123648")){
                 Log.i("destination", String.valueOf(destination));
-                bundle.putString("id", "1.Herren");
+                bundle.putString("id", "1-Herren");
                 navigateToTarget(destination, bundle);
             }
             if(password.equals("483612")){
-                bundle.putString("id", "1.Damen");
+                bundle.putString("id", "1-Damen");
                 navigateToTarget(destination, bundle);
             }
         });

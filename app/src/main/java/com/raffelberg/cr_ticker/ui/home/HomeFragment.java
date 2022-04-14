@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.raffelberg.cr_ticker.databinding.FragmentHomeBinding;
+import com.raffelberg.cr_ticker.persistence.MatchViewModel;
+import com.raffelberg.cr_ticker.persistence.MatchViewModelFactory;
 
 public class HomeFragment extends Fragment {
 
@@ -26,6 +28,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
+
         return root;
     }
 
@@ -33,6 +37,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        MatchViewModelFactory factory= new MatchViewModelFactory(requireActivity().getApplication());
+        MatchViewModel matchViewModel = new ViewModelProvider(this,factory).get(MatchViewModel.class);
+        matchViewModel.getMatch("1-Herren").observe(getViewLifecycleOwner(), match -> {
+            String place = match.getPlace();
+        });
 
         RecyclerView recyclerView = binding.homeRecyclerView;
         adapter = new HomeAdapter();
