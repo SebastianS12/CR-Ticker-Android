@@ -1,6 +1,8 @@
 package com.raffelberg.cr_ticker.ImageOperations;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -11,7 +13,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class ImageLoader {
@@ -46,5 +50,18 @@ public class ImageLoader {
         storageRef.getFile(file).addOnSuccessListener(taskSnapshot -> {
             Log.e("Download", "Download");
         });
+    }
+
+    public void uploadLogoFromImageView(String logoPath, ImageView imageView){
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(logoPath);
+        storageRef.putBytes(data);
     }
 }

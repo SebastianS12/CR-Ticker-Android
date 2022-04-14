@@ -14,11 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.raffelberg.cr_ticker.ImageOperations.ImageLoader;
 import com.raffelberg.cr_ticker.R;
 import com.raffelberg.cr_ticker.databinding.FragmentAddmatchBinding;
+import com.raffelberg.cr_ticker.persistence.Match;
+import com.raffelberg.cr_ticker.persistence.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,29 +78,27 @@ public class AddMatchFragment extends Fragment {
         getLogoUrls();
 
         //select team logos
-        logo1ImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("team", 1);
-                bundle.putStringArrayList("logoPaths", (ArrayList<String>) logoPaths);
-                getParentFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .add(R.id.addMatch_logoPickerContainer, LogoPickerFragment.class, bundle)
-                        .commit();
-            }
+        logo1ImageView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("team", 1);
+            bundle.putStringArrayList("logoPaths", (ArrayList<String>) logoPaths);
+            getParentFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.addMatch_logoPickerContainer, LogoPickerFragment.class, bundle)
+                    .commit();
         });
-        logo2ImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("team", 2);
-                bundle.putStringArrayList("logoPaths", (ArrayList<String>) logoPaths);
-                getParentFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .add(R.id.addMatch_logoPickerContainer, LogoPickerFragment.class, bundle)
-                        .commit();
-            }
+        logo2ImageView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("team", 2);
+            bundle.putStringArrayList("logoPaths", (ArrayList<String>) logoPaths);
+            getParentFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.addMatch_logoPickerContainer, LogoPickerFragment.class, bundle)
+                    .commit();
+        });
+
+        addButton.setOnClickListener(view -> {
+            uploadMatch();
         });
 
         return root;
@@ -111,6 +114,7 @@ public class AddMatchFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        FirebaseAuth.getInstance().signOut();
         binding = null;
     }
 
@@ -123,5 +127,22 @@ public class AddMatchFragment extends Fragment {
                 logoPaths.add(prefix.getName());
             }
         });
+    }
+
+    private void uploadMatch(){
+        String id = getArguments().getString("id");
+        String place = placeTextView.getText().toString();
+        String date = dateTextView.getText().toString();
+        String teamName1 = teamName1TextView.getText().toString();
+        String teamName2 = teamName2TextView.getText().toString();
+
+        Match newMatch = new Match(id, place, date, new Team(teamName1), new Team(teamName2));
+
+        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference();
+        dbReference.child("Matches").setValue(newMatch);
+
+        ImageLoader imageLoader = new ImageLoader();
+        imageLoader.uploadLogoFromImageView("logoRebuild1", logo1ImageView);
+        imageLoader.uploadLogoFromImageView("logoRebuild2", logo2ImageView);
     }
 }
