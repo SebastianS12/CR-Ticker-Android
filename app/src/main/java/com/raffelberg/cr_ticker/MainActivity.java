@@ -60,7 +60,10 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        addDatabaseListener("1-Herren", this);
+        //add database listeners
+        for(String id : getResources().getStringArray(R.array.teamIDS)){
+            addDatabaseListener(id, this);
+        }
 
         //refer to LogIn if needed
         mAuth = FirebaseAuth.getInstance();

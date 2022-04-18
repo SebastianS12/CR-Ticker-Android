@@ -50,7 +50,7 @@ public class LogoPickerAdapter extends RecyclerView.Adapter<LogoPickerAdapter.Vi
     public void onBindViewHolder(@NonNull LogoPickerAdapter.ViewHolder holder, int position) {
         //holder.getImageView().setImageResource(context.getResources().getIdentifier("/drawable/"+logoList[position], null, context.getPackageName()));
         ImageLoader imageLoader = new ImageLoader();
-        imageLoader.loadLogo(holder.getImageView(), logoPaths.get(position), context);
+        imageLoader.loadLogo(holder.getImageView(), logoPaths.get(position), context, "gs://cr-ticker-herren-logos");
         holder.getImageView().setOnClickListener(v -> {
             logoPickListener.addLogo(logoPaths.get(position));
         });

@@ -20,7 +20,7 @@ import java.io.File;
 
 public class ImageLoader {
 
-    public void loadLogo(ImageView imageView, String logoPath, Context context){
+    public void loadLogo(ImageView imageView, String logoPath, Context context, String instance){
         File logoFile = new File(context.getFilesDir(), logoPath);
         RequestOptions options = new RequestOptions()
                 .skipMemoryCache(true)
@@ -33,7 +33,7 @@ public class ImageLoader {
                     .apply(options)
                     .into(imageView);
         }else{
-            StorageReference storageRef = FirebaseStorage.getInstance("gs://cr-ticker-herren-logos").getReference().child(logoPath);
+            StorageReference storageRef = FirebaseStorage.getInstance(instance).getReference().child(logoPath);
             Glide.with(imageView)
                     .load(storageRef)
                     .apply(options)
@@ -52,7 +52,7 @@ public class ImageLoader {
         });
     }
 
-    public void uploadLogoFromImageView(String logoPath, ImageView imageView){
+    public void uploadLogoFromImageView(String id, String logoName, ImageView imageView){
         // Get the data from an ImageView as bytes
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
@@ -61,7 +61,7 @@ public class ImageLoader {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(logoPath);
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(id).child(logoName);
         storageRef.putBytes(data);
     }
 }

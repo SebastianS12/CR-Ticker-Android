@@ -54,9 +54,9 @@ public class AddMatchFragment extends Fragment {
 
             ImageLoader imageLoader = new ImageLoader();
             if(team == 1)
-                imageLoader.loadLogo(logo1ImageView, logoPath, getContext());
+                imageLoader.loadLogo(logo1ImageView, logoPath, getContext(), "gs://cr-ticker-herren-logos");
             if(team == 2)
-                imageLoader.loadLogo(logo2ImageView, logoPath, getContext());
+                imageLoader.loadLogo(logo2ImageView, logoPath, getContext(), "gs://cr-ticker-herren-logos");
         });
 
     }
@@ -122,7 +122,6 @@ public class AddMatchFragment extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://cr-ticker-herren-logos");
         StorageReference ref = storage.getReference();
         ref.listAll().addOnSuccessListener(listResult -> {
-            Log.i("test", "connected");
             for(StorageReference prefix : listResult.getItems()){
                 logoPaths.add(prefix.getName());
             }
@@ -142,7 +141,7 @@ public class AddMatchFragment extends Fragment {
         dbReference.child("Matches").child(id).setValue(newMatch);
 
         ImageLoader imageLoader = new ImageLoader();
-        imageLoader.uploadLogoFromImageView("logoRebuild1", logo1ImageView);
-        imageLoader.uploadLogoFromImageView("logoRebuild2", logo2ImageView);
+        imageLoader.uploadLogoFromImageView(id,"logoRebuild1", logo1ImageView);
+        imageLoader.uploadLogoFromImageView(id,"logoRebuild2", logo2ImageView);
     }
 }

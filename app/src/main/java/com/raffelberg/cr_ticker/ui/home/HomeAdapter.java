@@ -10,13 +10,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.raffelberg.cr_ticker.ImageOperations.ImageLoader;
 import com.raffelberg.cr_ticker.R;
+import com.raffelberg.cr_ticker.persistence.Match;
+import com.raffelberg.cr_ticker.persistence.MatchViewModel;
+import com.raffelberg.cr_ticker.persistence.MatchViewModelFactory;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private Context context;
+    private String[] teamIDList;
+    private HashMap<String, Match> matchMap;
+
+    public HomeAdapter(String[] teamIDList){
+        matchMap = new HashMap<>();
+        this.teamIDList = teamIDList;
+    }
 
     @NonNull
     @NotNull
@@ -32,14 +48,27 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+        Match currentMatch = matchMap.get(teamIDList[position]);
 
+        holder.getTextViewPlace().setText(currentMatch.getPlace());
+        holder.getTextViewDate().setText(currentMatch.getDate());
+        holder.getTextViewTeamName1().setText(currentMatch.getTeam1().getTeamName());
+        holder.getTextViewTeamScore1().setText(currentMatch.getTeam1().getTeamScore());
+        holder.getTextViewTeamName2().setText(currentMatch.getTeam2().getTeamName());
+        holder.getTextViewTeamScore2().setText(currentMatch.getTeam2().getTeamScore());
 
+        ImageLoader imageLoader = new ImageLoader();
+        imageLoader.loadLogo(holder.getImageViewLogo1(), teamIDList[position]+"/logoRebuild1", context, "gs://cr-ticker.appspot.com");
+        imageLoader.loadLogo(holder.getImageViewLogo2(), teamIDList[position]+"/logoRebuild2", context, "gs://cr-ticker.appspot.com");
     }
 
     @Override
     public int getItemCount() {
-            return 2;
-            //return teamIDList.size();
+            return matchMap.size();
+    }
+
+    public void setMatchMap(HashMap<String, Match> matchMap){
+        this.matchMap = matchMap;
     }
 
 
