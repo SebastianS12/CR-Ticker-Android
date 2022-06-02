@@ -1,6 +1,7 @@
 package com.raffelberg.cr_ticker.ui.home;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.raffelberg.cr_ticker.ImageOperations.ImageLoader;
@@ -60,6 +62,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         ImageLoader imageLoader = new ImageLoader();
         imageLoader.loadLogo(holder.getImageViewLogo1(), teamIDList[position]+"/logoRebuild1", context, "gs://cr-ticker.appspot.com");
         imageLoader.loadLogo(holder.getImageViewLogo2(), teamIDList[position]+"/logoRebuild2", context, "gs://cr-ticker.appspot.com");
+
+        holder.getViewHolder().setOnClickListener(v -> {
+            //navigate
+            Bundle bundle = new Bundle();
+            bundle.putString("teamID", teamIDList[position]);
+            Navigation.findNavController(holder.getViewHolder()).navigate(R.id.action_nav_home_to_tickerLog, bundle);
+        });
     }
 
     @Override
