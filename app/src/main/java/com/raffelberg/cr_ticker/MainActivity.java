@@ -1,9 +1,11 @@
 package com.raffelberg.cr_ticker;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -17,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,8 +56,7 @@ public class MainActivity extends AppCompatActivity{
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                /*R.id.nav_home, R.id.nav_editMatch, R.id.nav_addmatch*/navController.getGraph())
+        mAppBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setOpenableLayout(drawer)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity{
         for(String id : getResources().getStringArray(R.array.teamIDS)){
             addDatabaseListener(id, this);
         }
+
+        //setup subscriptions
+        setUpSubscriptions();
 
         //refer to LogIn if needed
         mAuth = FirebaseAuth.getInstance();
@@ -92,6 +97,13 @@ public class MainActivity extends AppCompatActivity{
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+    }
+
     private void addDatabaseListener(String id, LifecycleOwner lifecycleOwner){
         DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference();
         dbReference.child("Matches").child(id).addValueEventListener(new ValueEventListener() {
@@ -111,5 +123,22 @@ public class MainActivity extends AppCompatActivity{
                 Log.i("DatabaseError", error.getMessage().toString());
             }
         });
+    }
+
+    private void setUpSubscriptions(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if(preferences.getBoolean("all_notifications_herren1", true)){
+            //subscribe
+        }
+        if(preferences.getBoolean("important_notifications_herren1", true)){
+            //subscribe
+        }
+        if(preferences.getBoolean("all_notifications_damen1", true)){
+            //subscribe
+        }
+        if(preferences.getBoolean("important_notifications_damen1", true)){
+            //subscribe
+        }
     }
 }

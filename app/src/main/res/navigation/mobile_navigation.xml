@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_tickerLog"
             app:destination="@id/tickerLog" />
+        <action
+            android:id="@+id/action_nav_home_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -56,4 +59,8 @@
             app:destination="@id/nav_addmatch"
             app:popUpTo="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.raffelberg.cr_ticker.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

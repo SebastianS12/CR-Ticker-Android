@@ -20,6 +20,7 @@ import java.io.File;
 
 public class ImageLoader {
 
+    //TODO: StorageExceptions
     public void loadLogo(ImageView imageView, String logoPath, Context context, String instance){
         File logoFile = new File(context.getFilesDir(), logoPath);
         RequestOptions options = new RequestOptions()

@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/settings_header">
+
+        <PreferenceCategory app:title="@string/Herren1">
+
+            <SwitchPreferenceCompat
+                app:defaultValue="true"
+                app:key="all_notifications_herren1"
+                app:title="@string/all_notifications_preference" />
+
+            <SwitchPreferenceCompat
+                app:key="important_notifications_herren1"
+                app:title="@string/important_notifications_preference" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory app:title="@string/Damen1">
+
+            <SwitchPreferenceCompat
+                app:defaultValue="true"
+                app:key="all_notifications_damen1"
+                app:title="@string/all_notifications_preference" />
+
+            <SwitchPreferenceCompat
+                app:key="important_notifications_damen1"
+                app:title="@string/important_notifications_preference" />
+
+        </PreferenceCategory>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
