@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.raffelberg.cr_ticker.databinding.ActivityMainBinding;
 import com.raffelberg.cr_ticker.persistence.Match;
 import com.raffelberg.cr_ticker.persistence.MatchRepository;
@@ -127,9 +128,11 @@ public class MainActivity extends AppCompatActivity{
 
     private void setUpSubscriptions(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
 
         if(preferences.getBoolean("all_notifications_herren1", true)){
             //subscribe
+            firebaseMessaging.subscribeToTopic("all_notifications_herren1");
         }
         if(preferences.getBoolean("important_notifications_herren1", true)){
             //subscribe

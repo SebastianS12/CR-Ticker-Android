@@ -12,10 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
 import com.raffelberg.cr_ticker.R;
 import com.raffelberg.cr_ticker.databinding.FragmentEditmatchBinding;
 import com.raffelberg.cr_ticker.persistence.Match;
@@ -23,7 +27,10 @@ import com.raffelberg.cr_ticker.persistence.MatchViewModel;
 import com.raffelberg.cr_ticker.persistence.MatchViewModelFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class EditMatchFragment extends Fragment {
 
@@ -116,7 +123,7 @@ public class EditMatchFragment extends Fragment {
         return logs;
     }
 
-    public void submitLog(String log){
+    private void submitLog(String log){
         List<String> logs = addLog(log);
         String id = requireArguments().getString("id");
 
@@ -124,14 +131,31 @@ public class EditMatchFragment extends Fragment {
             @Override
             public void onSuccess(Void unused) {
                 //send firebase cloud message
-                //sendNotification(log, teamID[0]);
+                sendNotification(log, id);
             }
         }).addOnFailureListener(e -> {
             Toast.makeText(requireContext(), getString(R.string.failure_message), Toast.LENGTH_LONG).show();
         });
     }
 
-    public void increaseScore(TextView viewScore, String team, String teamName){
+    private void sendNotification(String log, String teamID){
+        FirebaseFunctions mFunctions = FirebaseFunctions.getInstance();
+        Map<String, String> data = new HashMap<>();
+        data.put("topic", "cr-ticker_all_notifications_" + teamID);
+        data.put("text", log);
+
+        mFunctions.getHttpsCallable("sendNotification")
+                .call(data)
+                .continueWith(new Continuation<HttpsCallableResult, String>() {
+                    @Override
+                    public String then(@NonNull Task<HttpsCallableResult> task){
+
+                        return (String) Objects.requireNonNull(task.getResult()).getData();
+                    }
+                });
+    }
+
+    private void increaseScore(TextView viewScore, String team, String teamName){
         String score = String.valueOf(Integer.parseInt(viewScore.getText().toString())+1);
         //viewScore.setText(score);
         String goalLog = getString(R.string.goal_notification) + " " + teamName;
@@ -146,7 +170,7 @@ public class EditMatchFragment extends Fragment {
         });
     }
 
-    public void decreaseScore(TextView viewScore, String team){
+    private void decreaseScore(TextView viewScore, String team){
         if(Integer.parseInt(viewScore.getText().toString())>0) {
             String score = String.valueOf(Integer.parseInt(viewScore.getText().toString()) - 1);
             viewScore.setText(score);

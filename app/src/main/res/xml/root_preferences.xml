@@ -10,6 +10,7 @@
                 app:title="@string/all_notifications_preference" />
 
             <SwitchPreferenceCompat
+                app:defaultValue="true"
                 app:key="important_notifications_herren1"
                 app:title="@string/important_notifications_preference" />
 
@@ -23,6 +24,7 @@
                 app:title="@string/all_notifications_preference" />
 
             <SwitchPreferenceCompat
+                app:defaultValue="true"
                 app:key="important_notifications_damen1"
                 app:title="@string/important_notifications_preference" />
 

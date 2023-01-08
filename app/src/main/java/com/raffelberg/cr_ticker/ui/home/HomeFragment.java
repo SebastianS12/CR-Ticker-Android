@@ -41,12 +41,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MatchViewModelFactory factory= new MatchViewModelFactory(requireActivity().getApplication());
-        MatchViewModel matchViewModel = new ViewModelProvider(this,factory).get(MatchViewModel.class);
-        matchViewModel.getMatch("1-Herren").observe(getViewLifecycleOwner(), match -> {
-            String place = match.getPlace();
-        });
-
         RecyclerView recyclerView = binding.homeRecyclerView;
         adapter = new HomeAdapter(getResources().getStringArray(R.array.teamIDS));
         recyclerView.setAdapter(adapter);
